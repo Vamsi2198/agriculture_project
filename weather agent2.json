@@ -1,0 +1,202 @@
+{
+  "name": "weather agent2",
+  "nodes": [
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "api"
+            },
+            {
+              "name": "location"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -640,
+        64
+      ],
+      "id": "92f28d61-b708-4754-bd6d-62c17165b31e",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.api }}",
+                    "rightValue": "=get_current_weather_by_city",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "8ad5942d-2473-4dd1-a9f7-0e6fa98e602f"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "39ca80af-d9f3-4300-86f8-c9392e307563",
+                    "leftValue": "={{ $json.api }}",
+                    "rightValue": "get_weather_forecast_by_city",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -352,
+        64
+      ],
+      "id": "da1f4573-fffd-43dc-b06d-4c3e77142be3",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "url": "https://api.openweathermap.org/data/2.5/weather",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('When Executed by Another Workflow').item.json.location }}"
+            },
+            {
+              "name": "appid",
+              "value": "5c875ed4ad75cf5af71fba16a778fcc9"
+            },
+            {
+              "name": "units",
+              "value": "metric"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "c2dca3d9-55d2-4881-b703-3a54bd389c16",
+      "name": "get_current_weather_by_city"
+    },
+    {
+      "parameters": {
+        "url": "https://api.openweathermap.org/data/2.5/forecast",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "q",
+              "value": "={{ $('When Executed by Another Workflow').item.json.location }}"
+            },
+            {
+              "name": "appid",
+              "value": "5c875ed4ad75cf5af71fba16a778fcc9"
+            },
+            {
+              "name": "units",
+              "value": "metric"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        16,
+        160
+      ],
+      "id": "fd2f2cd0-5263-4181-bb33-8381ec7ba8a5",
+      "name": "get_weather_forecast_by_city"
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "api": "get_current_weather_by_city",
+          "location": "Bangalore"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "get_current_weather_by_city",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "get_weather_forecast_by_city",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "a3246d4d-9536-44be-863a-ee727ec9be36",
+  "meta": {
+    "instanceId": "5cb330a9fae5a3101c3c4c831a4baaa8afe7513ceb888c201e11eef28d626e34"
+  },
+  "id": "3y15GVmdX3HqHoLR",
+  "tags": []
+}
