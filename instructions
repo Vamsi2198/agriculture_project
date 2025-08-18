@@ -1,0 +1,33 @@
+# 📘 Agriculture AI Agent – Setup Instructions
+
+This file guides you through setting up and running the agriculture AI agent system using **n8n**, **Supabase**, **OpenAI**, and **Twilio (WhatsApp)**.
+
+---
+
+## 📁 Step 1: Clone or Download the Repository
+
+```bash
+git clone https://github.com/Vamsi2198/agriculture_project.git
+cd agriculture_project
+Or download the ZIP file directly from:
+👉 https://github.com/Vamsi2198/agriculture_project
+Step 2: Launch n8n (No Install Needed)
+open your browser and go to:https://n8n.io/?ps_partner_key=ODliYjZiMjZkOTIx&ps_xid=sitPpeER75gCkt&gsxid=sitPpeER75gCkt&gspk=ODliYjZiMjZkOTIx&gad_source=1
+and if you dont want to create account use main credentials mention in credentails file in sam egithub repo from there you can start testing easily
+if you created account do
+Step 3: Import Workflows into n8n 
+Go to Workflows > Import Workflow
+Import each of the JSON files located in the /workflows folder:
+agriculture_agent_workflow.json
+file_ingestion_workflow.json
+weather_agent.json
+follow_up_question_agent.json
+etc.
+
+Save them with clear names for better workflow management.
+
+Step 4: Add Credentials (via GitHub  credentials File)
+After importing jsons, open workflows open superbase or openai use the credentials mentioned in credentials file and if you do for one node
+go and jsut open other node credentials will pick automatically
+do the same for all nodes in agents
+
