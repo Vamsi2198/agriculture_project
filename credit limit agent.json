@@ -1,0 +1,142 @@
+{
+  "name": "credit limit agent",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://web-production-6b606.up.railway.app/api/loan-status/ {{ $json.phone_number }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "accept",
+              "value": "=application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        192,
+        0
+      ],
+      "id": "29233379-45d6-459d-adf4-57dd7dacc64c",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=phone number : {{ $json.phone_number }}\ncredit_limit : {{ $json.credit_limit }}\nstatus : {{ $json.status }}",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        384,
+        -16
+      ],
+      "id": "5fcdb5dc-8586-4a9a-aae4-380122021927",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "gpt-3.5-turbo"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        368,
+        160
+      ],
+      "id": "29d805c3-ddcf-4387-a70f-c94ff992e9ab",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "YmVEpJdwSiBjPaX5",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "phone_number"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -32,
+        -16
+      ],
+      "id": "41878654-1d4e-4513-8b76-c9a9e0c11b95",
+      "name": "When Executed by Another Workflow"
+    }
+  ],
+  "pinData": {
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "phone_number": "7780782425"
+        }
+      }
+    ]
+  },
+  "connections": {
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "e4206985-908a-4267-a631-77b09a71792e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "12e1210318d2eb3dd24427f83c4648ba72010e086d8eac53cb423869335b030f"
+  },
+  "id": "WhgjhID8odRmPwPA",
+  "tags": []
+}
