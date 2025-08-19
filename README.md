@@ -12,7 +12,7 @@ This project provides a complete, modular system of **agricultural automation ag
 
 | File Name                         | Purpose |
 |----------------------------------|---------|
-| `main Agriculture Agent.json`    | Main agent that handles incoming messages and routes them |
+| `[main Agriculture Agent.json](https://github.com/Vamsi2198/agriculture_project/blob/main/main%20Agriculture%20Agent.json)`    | Main agent that handles incoming messages and routes them |
 | `crop and varieties agent.json`  | Advises on crop types and varieties |
 | `finance and policy agent.json`  | Responds to policy, scheme, and subsidy queries |
 | `market and post harvest agent.json` | Provides market prices and post-harvest support |
