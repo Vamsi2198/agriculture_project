@@ -21,7 +21,6 @@ TerraCred™ revolutionizes agricultural credit assessment by:
 
 - 🛰️ **Leveraging zero-cost public datasets** (NDVI, IMD rainfall, Soil Health Cards)
 - 🤖 **AI-powered instant predictions** with explainable results
-- 💻 **Low-cost deployment** on ₹2,500 Raspberry Pi Zero (in loop)
 - 🌍 **Multi-language support** via SMS, WhatsApp, or chatbot (in loop)
 - ⚡ **Dual prediction models**: Credit limit estimation + loan approval classification
 
