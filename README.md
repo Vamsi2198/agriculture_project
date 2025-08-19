@@ -24,6 +24,9 @@ This project provides a complete, modular system of **agricultural automation ag
 | `credentials`                    | Stores credentials for **Vector DB** and **n8n environment** |
 | `agriculture workflow.png`       | Visual overview of the workflow architecture |
 | `whatsApp QR code.png`           | QR code to connect your WhatsApp number with n8n (if using WhatsApp automation) |
+| `credit limit agent.json`        | Handles real-time credit limit and micro-credit queries via TerraCred |
+
+This project integrates with the [TerraCred Project Repository](https://github.com/Vamsi2198/agriculture_project/tree/main/terra_project), which powers the credit limit agent for delivering real-time micro-credit assistance.
 
 ---
 
@@ -88,6 +91,8 @@ The agriculture agent system accepts inputs from two sources: **Web URL** or **W
    - Each sub-agent specializes in a particular domain (e.g., crop variety, weather, soil, policy).
    - The orchestration agent interacts with sub-agents as needed to **collect relevant data**.
    - This interaction continues **until a meaningful response** is obtained.
+   -  **Credit Limit Agent**: Integrated with the [TerraCred system](https://github.com/Vamsi2198/agriculture_project/tree/main/terra_project), this agent provides real-time KCC top-up limits and micro-credit suggestions.
+
 
 5. **Follow-Up Generation**:
    - After receiving the main response, a **follow-up question generation agent** analyzes the output.
@@ -156,7 +161,9 @@ Try sending messages in different Indian languages. The system will:
 Observe how the agents coordinate and handle multi-lingual inputs seamlessly.
 
 ---
+## 🔗 Linked Projects
 
+- [TerraCred Project Repository](https://github.com/Vamsi2198/agriculture_project/tree/main/terra_project) – Provides real-time credit data and decisioning for the Credit Limit Agent.
 
 
 ##  Contributing
